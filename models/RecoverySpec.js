@@ -9,27 +9,27 @@ var keystone = require('keystone'),
 var RecoverySpec = new keystone.List('RecoverySpec', {
 	map: { name: 'fruitName' },
 	autokey: { path: 'slug', from: 'supplierName.full', unique: true },
-	defaultSort: '-supplierName'
+	defaultSort: '-supplierName',
+	sortable: true
 });
 
 RecoverySpec.add(
-	{heading: 'Summary'},
-	{supplierName: { type: String, required: true, initial: true},
-	city: { type: String },
-	state: { type: String },
-	profilePicture: {type: Types.CloudinaryImage, required: false, initial: false}},
-	{heading: 'Full Profile'},
-	{profileURL: { type: Types.Url, required: false },
-	profileHeadline: { type: String, required: false },
-	profileBody: { type: Types.Textarea, required: false },
-	supplierEmail: { type: Types.Email, displayGravatar: true }},
+	{heading: 'Supplier Profile'},
+	{name: { type: String, required: true, initial: true},
+	address: {type: Types.Location, enableMapsAPI: true},
+	logoPicture: {type: Types.CloudinaryImage, required: false, initial: false},
+	phone: { type: Types.Number, required: false },
+	email: { type: Types.Email, displayGravatar: true }},
 	{heading: 'Recovery Specs'},
 	{fruit: {  type: Types.Relationship, ref: 'Fruits', many: true, initial: true },
-	Organic: { type: Types.Boolean, required: false},
-	totalWeight: { type: Types.Number, required: false },
+	type: { type: Types.Select, options: 'Organic, Conventional'},
+	totalWeight: { type: Types.Number, required: false, label: "Total Weight (lbs)" },
+	weightPerBox: { type: Types.Number, required: false, label: "lbs/Box"},
+	daysLeft: {type: Types.Select, options: '3 to 5 days, More than one week'},
+	condition: {type: String, required: false, label: "Additional Comments on Condition"},
 	enteredDate: { type: Types.Date, default: Date.now}}
 )
 	
 
-RecoverySpec.defaultColumns = ('supplierName, fruit, isOrganic, totalWeight, city, state|15%, enteredDate');
+RecoverySpec.defaultColumns = ('name, fruit, organic, totalWeight|10%, weightPerBox|10%, address|15%, enteredDate');
 RecoverySpec.register();

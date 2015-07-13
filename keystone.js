@@ -88,10 +88,17 @@ keystone.set('email rules', [{
 
 keystone.set('email tests', require('./routes/emails'));
 
+// Load Google Maps API
+
+keystone.set('google api key', 'AIzaSyAG9SbjvUJn0FdvLkgGM-dwA9dakvBfqvA');
+keystone.set('google server api key', 'AIzaSyD_XU9Y-8RBjYStE2Eupav6wAs5xts-6Cg');
+keystone.set('default region', 'us'); // optional, will limit autocomplete results to Australia
+
 // Configure the navigation bar in Keystone's Admin UI
 
 keystone.set('nav', {
 	'posts': ['posts', 'post-categories'],
+	'recovery specs': 'recovery-specs',
 	'galleries': 'galleries',
 	'enquiries': 'enquiries',
 	'users': 'users'
