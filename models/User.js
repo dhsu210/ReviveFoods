@@ -13,8 +13,8 @@ var User = new keystone.List('User', {
 
 User.add({
 	//basic info
-	name: { type: Types.Name, required: true, index: true },
-	userName: { type: String, initial: true, required: true },
+	name: { type: Types.Name, initial: true, required: true, index: true },
+	userName: { type: String, initial: true, required: true},
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 
@@ -24,7 +24,6 @@ User.add({
 
 	//other info
 	dateSignedUp: { type: Types.Date, default: Date.now },
-	notesAboutUser: { type: Types.Textarea, height: 100 },
 	companyName: {type: String, label: 'Company'},
 
 	//Shipping address
@@ -49,7 +48,7 @@ User.schema.virtual('canAccessKeystone').get(function() {
  */
 
 User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
-User.relationship({ ref: 'RecoverySpec', path: 'recoverySpecs', refPath: 'supplier'});
+User.relationship({ ref: 'RecoverySpec', path: 'supplier', refPath: 'supplier'});
 
 
 /**

@@ -7,19 +7,15 @@ var keystone = require('keystone'),
  */
 
 var RecoverySpec = new keystone.List('RecoverySpec', {
-	map: { name: 'fruitName' },
-	autokey: { path: 'slug', from: 'supplierName.full', unique: true },
-	defaultSort: '-supplierName',
+	map: { name: 'enteredDate' },
+	autokey: { path: 'slug', from: 'supplier', unique: true },
+	defaultSort: '-enteredDate',
 	sortable: true
 });
 
 RecoverySpec.add(
 	{heading: 'Supplier Profile'},
-	{name: { type: String, required: true, initial: true},
-	address: {type: Types.Location, enableMapsAPI: true},
-	logoPicture: {type: Types.CloudinaryImage, required: false, initial: false},
-	phone: { type: Types.Number, required: false },
-	email: { type: Types.Email, displayGravatar: true }},
+	{supplier: {type: Types.Relationship, ref: 'User', initial: true}},
 	{heading: 'Recovery Specs'},
 	{fruit: {  type: Types.Relationship, ref: 'Fruits', many: true, initial: true },
 	type: { type: Types.Select, options: 'Organic, Conventional'},
@@ -31,5 +27,5 @@ RecoverySpec.add(
 )
 	
 
-RecoverySpec.defaultColumns = ('name, fruit, organic, totalWeight|10%, weightPerBox|10%, address|15%, enteredDate');
+RecoverySpec.defaultColumns = ('supplier, fruit, type, totalWeight, enteredDate');
 RecoverySpec.register();
