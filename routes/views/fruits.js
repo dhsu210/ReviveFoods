@@ -16,7 +16,7 @@ exports = module.exports = function(req, res) {
 
 
   view.on('init', function(next) {
-    var q = keystone.list('Fruits').model.find().where('isFeaturedFruit', true)
+    var q = keystone.list('Fruits').model.find().where('fruitName')
 
     q.exec(function(err, result) {
       locals.data.featuredfruits = result;

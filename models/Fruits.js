@@ -12,21 +12,19 @@ var Fruits = new keystone.List('Fruits', {
 Fruits.add(
   {heading: 'Fruit'},
   {
-    fruitName: { type: String, required: true, initial: true},
-    fruitType: { type: String },
-    supplier: { type: Types.Relationship, ref: 'Supplier', index: true },
-    weight: { type: Types.Number, required: false},
+    fruitName: { type: String, required: true, index: true, initial: true},
+    fruitImage: {type: Types.CloudinaryImage, required: false, initial: false },
     initialQuantity: { type: Types.Number, required: false},
-    currentQuantity: { type: Types.Number, required: false},
+    currentQuantity: { type: Types.Number, required: false}
   },
-  {heading: 'Beer Description'},
+  {heading: 'Fruit Packaging'},
   {
-    beerDescription: { type: Types.Textarea },
-    flavorProfile: { type: Types.Select, options: 'Malty, Earthy, Aromatic, Sweet, Rich, Delicious', default: 'Delicious', index: true, many: true }
+    fruitDescription: { type: Types.Textarea },
+    packageType: { type: Types.Select, options: ['flat', 'case'] }
   }
   );
 
-Fruits.relationship({ ref: 'Supplier', path: 'Supplier', refPath: 'supplier'});
+Fruits.relationship({ ref: 'RecoverySpec', path: 'RecoverySpec', refPath: 'fruit'});
 
-Fruits.defaultColumns = 'fruitName, supplier, profileDate';
+Fruits.defaultColumns = 'fruitName, currentQuantity, packageType';
 Fruits.register();
