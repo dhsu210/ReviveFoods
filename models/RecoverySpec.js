@@ -7,7 +7,7 @@ var keystone = require('keystone'),
  */
 
 var RecoverySpec = new keystone.List('RecoverySpec', {
-	map: { name: 'enteredDate' },
+	map: { name: '_id' },
 	autokey: { path: 'slug', from: 'supplier', unique: true },
 	defaultSort: '-enteredDate',
 	sortable: true
